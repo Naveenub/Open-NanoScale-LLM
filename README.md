@@ -145,7 +145,7 @@ This works perfectly in `README.md` and GitHub renders it cleanly.
                                        │
                                        ▼
                          ┌───────────────────────────┐
-                         │      Final Response        │
+                         │      Final Response       │
                          │  (Grounded + Tool-aware)  │
                          └───────────────────────────┘
 ```
