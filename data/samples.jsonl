@@ -1,0 +1,2 @@
+{"instruction":"Why does this IAM policy fail?","input":"Policy denies s3:PutObject","output":"The policy lacks an Allow statement..."}
+{"instruction":"Debug this Dockerfile","input":"FROM ubuntu\nRUN apt-get install python","output":"Missing apt-get update causes failure..."}
