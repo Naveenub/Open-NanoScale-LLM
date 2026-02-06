@@ -130,25 +130,25 @@ Open-NanoScale-LLM/
 │   ├── test_cases.json
 │   ├── metrics.py
 │   └── run_eval.py
-└── dashboard/
+├── dashboard/
 │   └── gradio_eval.py
-├── rag-light-system/
-│   ├── backend/
-│   │   ├── app.py
-│   │   ├── ingest.py
-│   │   ├── retriever.py
-│   │   ├── llm.py
-│   │   ├── evaluate.py
-│   │   ├── config.py
-│   │   └── requirements.txt
-│   ├── frontend/
-│   │   ├── src/App.jsx
-│   │   ├── src/components/StageView.jsx
-│   │   └── src/index.css
-│   ├── data/
-│   │   ├── sample.pdf
-│   ├── docker-compose.yml
-│   └── README.md
+└── rag-light-system/
+    ├── backend/
+    │   ├── app.py
+    │   ├── ingest.py
+    │   ├── retriever.py
+    │   ├── llm.py
+    │   ├── evaluate.py
+    │   ├── config.py
+    │   └── requirements.txt
+    ├── frontend/
+    │   ├── src/App.jsx
+    │   ├── src/components/StageView.jsx
+    │   └── src/index.css
+    ├── data/
+    │   ├── sample.pdf
+    ├── docker-compose.yml
+    └── README.md
 ```
 
 ---
