@@ -265,8 +265,8 @@ A real, production‑style LLM demo — not a notebook.
 
 ## 🤗 Hugging Face Release
 
-* **Model**: `hf.co/<username>/opennanobanana`
-* **Live Space**: `hf.co/spaces/<username>/opennanobanana-demo`
+* **Model**: `hf.co/<Naveenub>/Open-NanoScale-LLM`
+* **Live Space**: `hf.co/spaces/<Naveenub>/Open-NanoScale-LLM-demo`
 
 Includes:
 
