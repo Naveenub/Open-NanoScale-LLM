@@ -54,6 +54,36 @@ All built in a **clean‑room**, reproducible way.
 
 ---
 
+## System Overview
+
+Retrieval‑Augmented Generation as a multi‑stage observation pipeline, inspired by light behavior.
+
+Stages:
+
+1. Ingestion (Observation)
+2. Chunking (Diffraction)
+3. Embedding (Refraction)
+4. Retrieval (Reflection)
+5. Reasoning (Interpretation)
+6. Evaluation (Noise & Hallucination Measurement)
+
+---
+
+## Tech Stack
+
+| Layer	         | Choice                           |
+| -------------- | -------------------------------- |
+| Backend	     | FastAPI                          |
+| Vector DB	     | Chroma (local) / Pinecone (prod) |
+| LLM	         | OpenAI / compatible              |
+| Embeddings	 | text-embedding-3-large           |
+| UI	         | React + Tailwind                 |
+| PDF Parsing	 | PyMuPDF                          |
+| Eval	         | RAGAS‑style metrics              |
+| Deploy	     | Docker + AWS EC2                 |
+
+---
+
 ## 🏗️ Repository Structure
 
 ```text
@@ -101,7 +131,24 @@ Open-NanoScale-LLM/
 │   ├── metrics.py
 │   └── run_eval.py
 └── dashboard/
-    └── gradio_eval.py
+│   └── gradio_eval.py
+├── rag-light-system/
+│   ├── backend/
+│   │   ├── app.py
+│   │   ├── ingest.py
+│   │   ├── retriever.py
+│   │   ├── llm.py
+│   │   ├── evaluate.py
+│   │   ├── config.py
+│   │   └── requirements.txt
+│   ├── frontend/
+│   │   ├── src/App.jsx
+│   │   ├── src/components/StageView.jsx
+│   │   └── src/index.css
+│   ├── data/
+│   │   ├── sample.pdf
+│   ├── docker-compose.yml
+│   └── README.md
 ```
 
 ---
