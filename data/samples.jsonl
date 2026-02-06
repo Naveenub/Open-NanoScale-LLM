@@ -1,2 +1,3 @@
-{"instruction":"Why does this IAM policy fail?","input":"Policy denies s3:PutObject","output":"The policy lacks an Allow statement..."}
-{"instruction":"Debug this Dockerfile","input":"FROM ubuntu\nRUN apt-get install python","output":"Missing apt-get update causes failure..."}
+{"instruction":"Why does an EC2 instance fail to access S3?","input":"Instance returns AccessDenied","output":"The EC2 instance lacks an IAM role or the attached role policy does not allow s3:GetObject. Verify the instance profile and policy permissions."}
+{"instruction":"Debug this Dockerfile","input":"FROM ubuntu\nRUN apt-get install python3","output":"The Dockerfile is missing apt-get update. Add it before installing packages to refresh the package index."}
+{"instruction":"Why does my API Gateway return 403?","input":"Lambda integration returns Forbidden","output":"A 403 often indicates missing IAM permission or a resource policy denying the request. Check Lambda invoke permissions and API Gateway authorizers."}
