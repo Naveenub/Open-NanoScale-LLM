@@ -1,2 +1,2 @@
 def score(output, expected):
-    return sum(e in output for e in expected) / len(expected)
+    return sum(k.lower() in output.lower() for k in expected) / len(expected)
