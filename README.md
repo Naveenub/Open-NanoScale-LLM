@@ -14,9 +14,12 @@ infrastructure, cloud, and systems reasoning.
 ```bash
 python scripts/prepare_data.py
 python scripts/train_lora.py
+```
 
 Inference
+```bash
 python scripts/inference.py
+```
 
 Disclaimer
 
@@ -35,3 +38,4 @@ git commit -m "Initial release: OpenNanoBanana nano LLM"
 git branch -M main
 git remote add origin https://github.com/<your-username>/opennanobanana.git
 git push -u origin main
+```
