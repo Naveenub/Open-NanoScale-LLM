@@ -1,0 +1,17 @@
+[
+  {
+    "question": "Why does EC2 fail to access S3?",
+    "expected_keywords": ["IAM", "role", "policy"],
+    "requires_context": true
+  },
+  {
+    "question": "Docker build fails during apt install",
+    "expected_keywords": ["apt-get update", "package index"],
+    "requires_context": false
+  },
+  {
+    "question": "API Gateway returns 403",
+    "expected_keywords": ["IAM", "authorizer", "resource policy"],
+    "requires_context": true
+  }
+]
