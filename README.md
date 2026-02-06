@@ -67,7 +67,13 @@ Open-NanoScale-LLM/
 │   └── lora.yaml
 ├── data/
 │   ├── raw/
+│   │   ├── devops_notes.md
+│   │   ├── docker_errors.md
+│   │   └── k8s_troubleshooting.md
 │   ├── processed/
+│   │   ├── instructions.jsonl
+│   │   ├── rag_chunks.jsonl
+│   │   └── README.md
 │   └── samples.jsonl
 ├── scripts/
 │   ├── prepare_data.py
@@ -96,6 +102,114 @@ Open-NanoScale-LLM/
 │   └── run_eval.py
 └── dashboard/
     └── gradio_eval.py
+```
+
+---
+
+## 🧱 ASCII Architecture Diagram (README-friendly)
+
+This works perfectly in `README.md` and GitHub renders it cleanly.
+
+```text
+                         ┌───────────────────────────┐
+                         │        User / Client       │
+                         │  (CLI, Gradio, FastAPI)    │
+                         └─────────────┬─────────────┘
+                                       │
+                                       ▼
+                         ┌───────────────────────────┐
+                         │   OpenNanoBanana Engine    │
+                         │  (Inference Orchestrator) │
+                         └─────────────┬─────────────┘
+                                       │
+               ┌───────────────────────┼───────────────────────┐
+               │                       │                       │
+               ▼                       ▼                       ▼
+     ┌─────────────────┐   ┌─────────────────────┐   ┌─────────────────┐
+     │ Tool Prechecks  │   │   RAG Retriever      │   │  Prompt Builder │
+     │ (AWS / Logs /   │   │ (FAISS / Chroma)     │   │  System + Rules │
+     │  API Context)   │   └───────────┬─────────┘   └──────────┬──────┘
+     └────────┬────────┘               │                        │
+              │                        ▼                        │
+              │           ┌────────────────────────┐            │
+              │           │   Vector Embeddings     │            │
+              │           │ (MiniLM / SBERT)        │            │
+              │           └───────────┬────────────┘            │
+              │                       │                         │
+              └───────────────────────┼─────────────────────────┘
+                                      ▼
+                         ┌───────────────────────────┐
+                         │  OpenNanoBanana LLM        │
+                         │ (TinyLlama + LoRA)         │
+                         └─────────────┬─────────────┘
+                                       │
+                                       ▼
+                         ┌───────────────────────────┐
+                         │      Final Response        │
+                         │  (Grounded + Tool-aware)  │
+                         └───────────────────────────┘
+```
+
+---
+
+## 🎨 SVG Architecture Diagram (for blog / HF / portfolio)
+
+You can save this as `docs/architecture.svg`
+(works on GitHub, Hugging Face, and blogs).
+
+```svg
+<svg width="900" height="620" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .box { fill:#f9fafb; stroke:#111827; stroke-width:1.5; rx:8; ry:8; }
+    .text { font-family:Arial, sans-serif; font-size:13px; fill:#111827; }
+    .arrow { stroke:#111827; stroke-width:1.4; marker-end:url(#arrowhead); }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#111827"/>
+    </marker>
+  </defs>
+
+  <!-- User -->
+  <rect x="350" y="20" width="200" height="50" class="box"/>
+  <text x="390" y="50" class="text">User / Client</text>
+
+  <!-- Engine -->
+  <rect x="320" y="100" width="260" height="60" class="box"/>
+  <text x="350" y="135" class="text">OpenNanoBanana Engine</text>
+
+  <!-- Tools -->
+  <rect x="60" y="220" width="220" height="60" class="box"/>
+  <text x="85" y="255" class="text">Tool Prechecks (AWS / Logs / API)</text>
+
+  <!-- RAG -->
+  <rect x="340" y="220" width="220" height="60" class="box"/>
+  <text x="375" y="255" class="text">RAG Retriever</text>
+
+  <!-- Prompt -->
+  <rect x="620" y="220" width="220" height="60" class="box"/>
+  <text x="650" y="255" class="text">Prompt Builder</text>
+
+  <!-- LLM -->
+  <rect x="320" y="350" width="260" height="60" class="box"/>
+  <text x="345" y="385" class="text">TinyLlama + LoRA (LLM)</text>
+
+  <!-- Output -->
+  <rect x="350" y="460" width="200" height="50" class="box"/>
+  <text x="385" y="490" class="text">Final Answer</text>
+
+  <!-- Arrows -->
+  <line x1="450" y1="70" x2="450" y2="100" class="arrow"/>
+  <line x1="450" y1="160" x2="170" y2="220" class="arrow"/>
+  <line x1="450" y1="160" x2="450" y2="220" class="arrow"/>
+  <line x1="450" y1="160" x2="730" y2="220" class="arrow"/>
+  <line x1="170" y1="280" x2="450" y2="350" class="arrow"/>
+  <line x1="450" y1="280" x2="450" y2="350" class="arrow"/>
+  <line x1="730" y1="280" x2="450" y2="350" class="arrow"/>
+  <line x1="450" y1="410" x2="450" y2="460" class="arrow"/>
+</svg>
 ```
 
 ---
