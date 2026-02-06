@@ -1,75 +1,328 @@
-# Open-NanoScale-LLM 🍌
+# 🍌 OpenNanoScaleLLM
 
-OpenNanoScaleLLM is an open-source nano-scale language model optimized for
-infrastructure, cloud, and systems reasoning.
+**OpenNanoScaleLLM** is a clean‑room, open‑source **nano‑scale Large Language Model (LLM)** inspired by the *ideas* behind Google’s internal small‑model research — but built **entirely in the open**, using Hugging Face Transformers.
 
-## Features
-- 1.1B parameter base (Qwen2.5-1.5B)
-- LoRA fine-tuning
-- Infra & DevOps focused
-- CPU/GPU friendly
-- Fully open-source
+It is designed to be **small, fast, infra‑aware, tool‑aware, and explainable**, not just fluent.
 
-## Training
-```bash
-python scripts/prepare_data.py
-python scripts/train_lora.py
-```
-
-Inference
-```bash
-python scripts/inference.py
-```
-
-Disclaimer
-
-This project is a clean-room open-source implementation.
-Not affiliated with Google or any proprietary NanoBanana project.
-
+> This is not a toy fine‑tune. It is a full, end‑to‑end LLM system with training, RAG, tools, evaluation, and live demos.
 
 ---
 
-##  GitHub push commands
+## 🚀 Why OpenNanoScaleLLM Exists
 
-```bash
-git init
-git add .
-git commit -m "Initial release: OpenNanoBanana nano LLM"
-git branch -M main
-git remote add origin https://github.com/<your-username>/opennanobanana.git
-git push -u origin main
+There is **no open‑source Google NanoBanana**:
+
+* No public repo
+* No weights
+* No training code
+
+That creates a gap.
+
+**OpenNanoScaleLLM fills that gap** with:
+
+* A real nano‑LLM (≈1.5B params)
+* Infrastructure & DevOps specialization
+* Retrieval‑Augmented Generation (RAG)
+* Tool‑aware reasoning to prevent hallucinations
+* Transparent evaluation metrics
+
+All built in a **clean‑room**, reproducible way.
+
+---
+
+## 🧠 Core Design Goals
+
+* 🧩 **Nano‑scale** – runs on modest GPUs / CPU when quantized
+* ⚡ **Fast inference** – LoRA + efficient base model
+* 🎯 **Domain‑specialized** – cloud, DevOps, Linux, APIs
+* 🔍 **Grounded answers** – RAG + context checks
+* 🛠️ **Tool‑aware** – asks for logs, regions, APIs when needed
+* 🔓 **Fully open** – Apache‑2.0 license
+
+---
+
+## 📐 Model Overview
+
+| Attribute      | Value                     |
+| -------------- | ------------------------- |
+| Base model     | Qwen2.5-1.5B            |
+| Parameters     | ~1.5B                     |
+| Fine‑tuning    | LoRA (SFT)                |
+| Context length | 4k tokens                 |
+| License        | Apache‑2.0                |
+| Library        | Hugging Face Transformers |
+
+---
+
+## 🏗️ Repository Structure
+
+```text
+Open-NanoScale-LLM/
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── configs/
+│   ├── model.yaml
+│   ├── training.yaml
+│   └── lora.yaml
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── samples.jsonl
+├── scripts/
+│   ├── prepare_data.py
+│   ├── train_lora.py
+│   ├── merge_lora.py
+│   ├── inference.py
+│   └── evaluate.py
+├── rag/
+│   ├── ingest.py
+│   ├── retriever.py
+│   ├── prompt.py
+│   └── qa.py
+├── tools/
+│   ├── aws.py
+│   ├── logs.py
+│   └── api.py
+├── app/
+│   ├── main.py
+│   ├── rag_engine.py
+│   └── schemas.py
+├── ui/
+│   └── gradio_app.py
+├── evals/
+│   ├── test_cases.json
+│   ├── metrics.py
+│   └── run_eval.py
+└── dashboard/
+    └── gradio_eval.py
 ```
 
-## Live Demo
+---
 
-### Backend
+## 🧪 Training Pipeline
+
+### 1️⃣ Dataset
+
+Instruction‑style JSONL focused on **infra reasoning**:
+
+* AWS IAM, EC2, S3, ECR
+* Docker & Kubernetes
+* CI/CD failures
+* API debugging
+
+Example:
+
+```json
+{
+  "instruction": "Why does an EC2 instance fail to access S3?",
+  "input": "AccessDenied error",
+  "output": "The EC2 instance likely lacks an IAM role or the attached policy does not allow s3:GetObject..."
+}
+```
+
+---
+
+### 2️⃣ Data Preparation
+
+```bash
+python scripts/prepare_data.py
+```
+
+Formats data into a model‑friendly instruction template.
+
+---
+
+### 3️⃣ LoRA Fine‑Tuning
+
+```bash
+python scripts/train_lora.py
+```
+
+* Efficient
+* Low VRAM
+* Domain‑focused
+
+---
+
+### 4️⃣ Merge LoRA
+
+```bash
+python scripts/merge_lora.py
+```
+
+Produces a standalone model for inference & upload.
+
+---
+
+## 🔍 Retrieval‑Augmented Generation (RAG)
+
+OpenNanoBanana is **RAG‑first**, not RAG‑bolted‑on.
+
+### RAG Flow
+
+```
+User Question
+   ↓
+Pre‑check (tools)
+   ↓
+Vector Retrieval (FAISS)
+   ↓
+Context Assembly
+   ↓
+Prompt Injection
+   ↓
+LLM Answer
+```
+
+### Knowledge Sources
+
+* Markdown / PDF docs
+* Cloud & DevOps references
+* User‑supplied documents
+
+Ingest once:
+
+```bash
+python rag/ingest.py
+```
+
+Run interactive QA:
+
+```bash
+python rag/qa.py
+```
+
+---
+
+## 🛠️ Tool‑Aware Reasoning (Anti‑Hallucination)
+
+Instead of guessing, the model **asks for missing info**.
+
+### Built‑in Tool Signals
+
+* **AWS** → asks for region, account, service
+* **Logs** → requests error logs
+* **API** → asks for endpoint, auth, method
+
+Example:
+
+> **User:** EC2 cannot pull image from ECR
+> **Model:** Please confirm the AWS region and ensure the EC2 IAM role has `ecr:GetAuthorizationToken` permission.
+
+This is intentional and by design.
+
+---
+
+## 📊 Evaluation & Hallucination Metrics
+
+Most projects skip this. OpenNanoBanana doesn’t.
+
+### Metrics Implemented
+
+* **Keyword Coverage** – expected technical concepts
+* **Groundedness** – answer vs retrieved context
+* **Hallucination Score** – unsupported content
+* **Refusal Correctness** – asks for info instead of guessing
+
+Run batch evaluation:
+
+```bash
+python evals/run_eval.py
+```
+
+### Visual Dashboard
+
+```bash
+python dashboard/gradio_eval.py
+```
+
+Shows:
+
+* Per‑question scores
+* Hallucination trends
+* Grounding quality
+
+---
+
+## 🌐 Live Demo
+
+### Backend (FastAPI)
+
 ```bash
 uvicorn app.main:app --reload
 ```
 
-🍌 OpenNanoBanana — Hugging Face Release Guide
-What you’ll end up with
-* hf.co/<you>/opennanobanana
-* hf.co/spaces/<you>/opennanobanana-demo
-A model people can actually try
+### Frontend (Gradio)
 
-1️⃣ Prerequisites (one-time)
 ```bash
-pip install huggingface_hub
-huggingface-cli login
+python ui/gradio_app.py
 ```
-Create a token on HF → Write access
 
-## Evaluation
+A real, production‑style LLM demo — not a notebook.
 
-OpenNanoBanana includes a custom evaluation framework measuring:
-- Answer grounding
-- Hallucination tendency
-- Technical coverage
-- Correct refusal behavior
+---
 
-Run:
-```bash
-python evals/run_eval.py
-python dashboard/gradio_eval.py
-```
+## 🤗 Hugging Face Release
+
+* **Model**: `hf.co/<username>/opennanobanana`
+* **Live Space**: `hf.co/spaces/<username>/opennanobanana-demo`
+
+Includes:
+
+* Model card
+* License
+* Demo UI
+
+---
+
+## ⚖️ License
+
+Apache License 2.0
+
+You are free to:
+
+* Use commercially
+* Modify
+* Redistribute
+
+---
+
+## ⚠️ Disclaimer
+
+This project is a **clean‑room, independent open‑source implementation**.
+
+* Not affiliated with Google
+* Not derived from any proprietary NanoBanana system
+* No private or restricted data used
+
+---
+
+## 🎯 Who This Is For
+
+* LLM / AI Engineers
+* Infra & DevOps Engineers exploring AI
+* Researchers interested in small‑model systems
+* Anyone tired of hype‑only LLM repos
+
+---
+
+## 🛣️ Roadmap
+
+* Multi‑knowledge‑base RAG
+* GGUF / Ollama packaging
+* Tool execution (not just awareness)
+* Deterministic infra mode
+
+---
+
+## ⭐ Final Note
+
+OpenNanoBanana is meant to be:
+
+* Readable
+* Reproducible
+* Honest
+* Useful
+
+If you build on it — ship it. 🍌🚀
