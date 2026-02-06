@@ -46,3 +46,16 @@ git push -u origin main
 ```bash
 uvicorn app.main:app --reload
 ```
+
+🍌 OpenNanoBanana — Hugging Face Release Guide
+What you’ll end up with
+* hf.co/<you>/opennanobanana
+* hf.co/spaces/<you>/opennanobanana-demo
+A model people can actually try
+
+1️⃣ Prerequisites (one-time)
+```bash
+pip install huggingface_hub
+huggingface-cli login
+```
+Create a token on HF → Write access
