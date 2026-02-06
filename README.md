@@ -59,3 +59,17 @@ pip install huggingface_hub
 huggingface-cli login
 ```
 Create a token on HF → Write access
+
+## Evaluation
+
+OpenNanoBanana includes a custom evaluation framework measuring:
+- Answer grounding
+- Hallucination tendency
+- Technical coverage
+- Correct refusal behavior
+
+Run:
+```bash
+python evals/run_eval.py
+python dashboard/gradio_eval.py
+```
