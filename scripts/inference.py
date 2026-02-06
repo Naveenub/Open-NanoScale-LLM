@@ -2,8 +2,11 @@ from transformers import pipeline
 
 pipe = pipeline(
     "text-generation",
-    model="Open-NanoScale-LLM",
-    device_map="auto"
+    model="merged-model",
+    device_map="auto",
+    max_new_tokens=256
 )
 
-print(pipe("Debug this CI/CD failure:"))
+prompt = "Debug this CI/CD failure: pipeline fails during docker build"
+out = pipe(prompt)[0]["generated_text"]
+print(out)
