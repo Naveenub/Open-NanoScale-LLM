@@ -1,14 +1,23 @@
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.schema import HumanMessage
+from config import LLM_MODEL
 
-llm = ChatOpenAI(model="gpt-4o-mini")
+llm = ChatOpenAI(
+    model=LLM_MODEL,
+    temperature=0.2
+)
 
-def generate_answer(context, question):
-prompt = f"""
+def generate_answer(context: str, question: str) -> str:
+    prompt = f"""
+You are a grounded assistant.
+Answer strictly using the provided context.
+
 Context:
 {context}
 
 Question:
 {question}
 """
-return llm([HumanMessage(content=prompt)]).content
+
+    response = llm([HumanMessage(content=prompt)])
+    return response.content
