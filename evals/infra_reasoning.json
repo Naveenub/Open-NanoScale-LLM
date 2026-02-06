@@ -1,0 +1,4 @@
+{
+  "question": "Why does an EC2 instance fail to access S3?",
+  "expected": ["IAM role", "policy", "VPC endpoint"]
+}
