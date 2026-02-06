@@ -39,3 +39,10 @@ git branch -M main
 git remote add origin https://github.com/<your-username>/opennanobanana.git
 git push -u origin main
 ```
+
+## Live Demo
+
+### Backend
+```bash
+uvicorn app.main:app --reload
+```
