@@ -45,7 +45,7 @@ All built in a **clean‑room**, reproducible way.
 
 | Attribute      | Value                     |
 | -------------- | ------------------------- |
-| Base model     | Qwen2.5-1.5B            |
+| Base model     | Qwen2.5-1.5B              |
 | Parameters     | ~1.5B                     |
 | Fine‑tuning    | LoRA (SFT)                |
 | Context length | 4k tokens                 |
@@ -112,8 +112,8 @@ This works perfectly in `README.md` and GitHub renders it cleanly.
 
 ```text
                          ┌───────────────────────────┐
-                         │        User / Client       │
-                         │  (CLI, Gradio, FastAPI)    │
+                         │       User / Client       │
+                         │  (CLI, Gradio, FastAPI)   │
                          └─────────────┬─────────────┘
                                        │
                                        ▼
@@ -133,14 +133,14 @@ This works perfectly in `README.md` and GitHub renders it cleanly.
               │                        ▼                        │
               │           ┌────────────────────────┐            │
               │           │   Vector Embeddings    │            │
-              │           │ (MiniLM / SBERT)       │            │
+              │           │   (MiniLM / SBERT)     │            │
               │           └───────────┬────────────┘            │
               │                       │                         │
               └───────────────────────┼─────────────────────────┘
                                       ▼
                          ┌───────────────────────────┐
-                         │  OpenNanoBanana LLM       │
-                         │ (TinyLlama + LoRA)        │
+                         │    OpenNanoScaleLLM       │
+                         │    (Qwen2.5-1.5B + LoRA)  │
                          └─────────────┬─────────────┘
                                        │
                                        ▼
