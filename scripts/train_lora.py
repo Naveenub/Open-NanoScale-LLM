@@ -10,7 +10,7 @@ with open("configs/lora.yaml") as f:
 with open("configs/training.yaml") as f:
     train_cfg = yaml.safe_load(f)
 
-model_name = "TinyLlama/TinyLlama-1.1B"
+model_name = "Qwen2.5-1.5B"
 
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
