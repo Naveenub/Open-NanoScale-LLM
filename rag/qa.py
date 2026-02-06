@@ -1,23 +1,17 @@
-from transformers import pipeline
-from rag.retriever import get_retriever
-from rag.prompt import build_prompt
+from tools.aws import requires_aws_context, aws_missing_info
+from tools.logs import requires_logs, request_logs
+from tools.api import requires_api_info, request_api_details
 
-pipe = pipeline(
-    "text-generation",
-    model="merged-model",
-    device_map="auto",
-    max_new_tokens=300
-)
+def precheck(question):
+    if requires_aws_context(question):
+        return aws_missing_info()
+    if requires_logs(question):
+        return request_logs()
+    if requires_api_info(question):
+        return request_api_details()
+    return None
 
-retriever = get_retriever()
-
-def answer(question):
-    docs = retriever.get_relevant_documents(question)
-    context = "\n".join(d.page_content for d in docs)
-    prompt = build_prompt(context, question)
-    return pipe(prompt)[0]["generated_text"]
-
-if __name__ == "__main__":
-    while True:
-        q = input(">> ")
-        print(answer(q))
+msg = precheck(question)
+if msg:
+    return msg
+    
