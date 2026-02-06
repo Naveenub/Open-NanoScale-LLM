@@ -145,8 +145,6 @@ Open-NanoScale-LLM/
     │   ├── src/App.jsx
     │   ├── src/components/StageView.jsx
     │   └── src/index.css
-    ├── data/
-    │   ├── sample.pdf
     ├── docker-compose.yml
     └── README.md
 ```
