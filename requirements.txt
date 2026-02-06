@@ -6,3 +6,7 @@ peft
 trl
 pyyaml
 sentencepiece
+faiss-cpu
+langchain
+pypdf
+tqdm
