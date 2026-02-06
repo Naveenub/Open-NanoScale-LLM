@@ -4,6 +4,8 @@ num_hidden_layers: 22
 num_attention_heads: 32
 intermediate_size: 5632
 max_position_embeddings: 4096
+max_seq_length: 4096
 rope_scaling: dynamic
 attention_type: grouped_query
 kv_cache_compression: true
+use_flash_attention: true
