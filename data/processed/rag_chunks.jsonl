@@ -1,0 +1,3 @@
+{"id":"aws_iam_1","text":"An EC2 instance accesses AWS services using an IAM role. If no role is attached, API calls such as S3 access will fail with AccessDenied errors."}
+{"id":"docker_ecr_1","text":"For AWS ECR access, EC2 instances require the ecr:GetAuthorizationToken permission and Docker must authenticate using aws ecr get-login-password."}
+{"id":"k8s_debug_1","text":"CrashLoopBackOff indicates repeated container crashes. Common causes include application errors, missing environment variables, or invalid entrypoints."}
