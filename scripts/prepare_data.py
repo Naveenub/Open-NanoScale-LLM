@@ -1,15 +1,24 @@
 import json
+from pathlib import Path
 
-def format_sample(i, inp, out):
+SRC = Path("data/samples.jsonl")
+DST = Path("data/processed/train.jsonl")
+DST.parent.mkdir(parents=True, exist_ok=True)
+
+def format_sample(s):
     return {
-        "text": f"<|instruction|>{i}<|input|>{inp}<|output|>{out}"
+        "text": (
+            "<|instruction|>\n" + s["instruction"] +
+            "\n<|input|>\n" + s["input"] +
+            "\n<|output|>\n" + s["output"]
+        )
     }
 
-with open("data/samples.jsonl") as f:
-    samples = [json.loads(l) for l in f]
+with SRC.open() as f:
+    samples = [json.loads(line) for line in f]
 
-processed = [format_sample(s["instruction"], s["input"], s["output"]) for s in samples]
+with DST.open("w") as f:
+    for s in samples:
+        f.write(json.dumps(format_sample(s)) + "\n")
 
-with open("data/processed/train.jsonl", "w") as f:
-    for p in processed:
-        f.write(json.dumps(p) + "\n")
+print(f"Processed {len(samples)} samples → {DST}")
