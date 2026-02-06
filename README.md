@@ -118,7 +118,7 @@ This works perfectly in `README.md` and GitHub renders it cleanly.
                                        │
                                        ▼
                          ┌───────────────────────────┐
-                         │   OpenNanoBanana Engine    │
+                         │   OpenNanoScaleLLM Engine │
                          │  (Inference Orchestrator) │
                          └─────────────┬─────────────┘
                                        │
@@ -126,21 +126,21 @@ This works perfectly in `README.md` and GitHub renders it cleanly.
                │                       │                       │
                ▼                       ▼                       ▼
      ┌─────────────────┐   ┌─────────────────────┐   ┌─────────────────┐
-     │ Tool Prechecks  │   │   RAG Retriever      │   │  Prompt Builder │
-     │ (AWS / Logs /   │   │ (FAISS / Chroma)     │   │  System + Rules │
+     │ Tool Prechecks  │   │   RAG Retriever     │   │  Prompt Builder │
+     │ (AWS / Logs /   │   │ (FAISS / Chroma)    │   │  System + Rules │
      │  API Context)   │   └───────────┬─────────┘   └──────────┬──────┘
      └────────┬────────┘               │                        │
               │                        ▼                        │
               │           ┌────────────────────────┐            │
-              │           │   Vector Embeddings     │            │
-              │           │ (MiniLM / SBERT)        │            │
+              │           │   Vector Embeddings    │            │
+              │           │ (MiniLM / SBERT)       │            │
               │           └───────────┬────────────┘            │
               │                       │                         │
               └───────────────────────┼─────────────────────────┘
                                       ▼
                          ┌───────────────────────────┐
-                         │  OpenNanoBanana LLM        │
-                         │ (TinyLlama + LoRA)         │
+                         │  OpenNanoBanana LLM       │
+                         │ (TinyLlama + LoRA)        │
                          └─────────────┬─────────────┘
                                        │
                                        ▼
@@ -153,9 +153,6 @@ This works perfectly in `README.md` and GitHub renders it cleanly.
 ---
 
 ## 🎨 SVG Architecture Diagram (for blog / HF / portfolio)
-
-You can save this as `docs/architecture.svg`
-(works on GitHub, Hugging Face, and blogs).
 
 ```svg
 <svg width="900" height="620" xmlns="http://www.w3.org/2000/svg">
@@ -210,6 +207,7 @@ You can save this as `docs/architecture.svg`
   <line x1="730" y1="280" x2="450" y2="350" class="arrow"/>
   <line x1="450" y1="410" x2="450" y2="460" class="arrow"/>
 </svg>
+
 ```
 
 ---
